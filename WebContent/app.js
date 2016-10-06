@@ -3,26 +3,28 @@
 	'use strict';
 	angular.module("LunchChecker",[])
 		.controller("LunchCheckerController",function($scope){
-			//alert("here");
-			//$scope.message="hi";
+	
 			$scope.checkFunction = function(){
-				if(!$scope.lunchMenu){
-					$scope.message="Please enter data first";
-				}
-				else{
-					var arr = ($scope.lunchMenu).split(",");
-					var len = arr.length;
+				try{
+					var arr = $scope.lunchMenu.split(",");
+					var count=0;
 					
-					if (len>3){
-						$scope.message="Too Much";
+					for(var i in arr){
+						if(arr[i]) count++;
 					}
-				
-					else if (len>0 && len<4){
+					if(count >3){
+						$scope.message="Too Much";
+					} else {
 						$scope.message="Enjoy :-)";
 					}
-									
 				}
-			};
+				catch(e){
+					console.log(e);
+					$scope.message="Please enter data first";
+				}
+			} ;
+				    
+				
 		});
 	
 })();
